@@ -1,0 +1,33 @@
+---
+title: "deployment on shinyapps.io"
+author: "David"
+date: "9/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A shiny app built on your local machine is only accessible to you yet there may be situations when you'll need to make it accessible to others through the web.  
+There are a number of options of how to go about it. The main ones being;
+
+**shinyapps.io**  
+Shinyapps.io is a software as a service product that let's you publish your shiny apps on the cloud. With this option you don't need to have a server and no installation is required either. 
+is it required of you to know how to configure a firewall to deploy and manage your shiny app. Shinyapps.io has both free and paid tiers. For this tutorial we will use the free tier.  
+  - rstudio connect    
+  - shiny server    
+  - docker container + shinyproxy    
+**RStudio Connect**    
+This is a publishing platform through which you can publish your R or Python applications.   
+With this option you can also publish your RMarkdown reports, Jupyter notebooks Flask and Plumber API's. 
+This approach is commercial.  
+
+**shiny server**  
+To be able to deploy your shiny application on shiny server you will need to have a linux server on which you will install shiny server program. With this approach you will need to have the knowhow of configuring and maintaining.  The shiny server program provides you with a web server that is designed to host shiny applications.    
+
+**shinyproxy**  
+To be able to deploy your application on shinyproxy you will have to first of all containerize your application using docker technology. This approach is also open-source but you will need a server that will host shinyproxy.  
+
+Lets see how deploying a shiny application to shinyapps.io is like.  
+
