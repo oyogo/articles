@@ -1,0 +1,32 @@
+---
+title: "Package installation"
+output: html_notebook
+---
+
+As a developer there may come a time when you want to switch to a new computer and definitely would want to install R and all the packages you had in your old machine, ofcourse you wouldn't want to install them one by one cause it might be tedious and time consuming. Another case scenario is where you have updated your base R to a new/old version. 
+The package reinstallr is quite handy for such a task. Below is an onpoint guide on how to go about the task.  
+
+Assumptions:  
+ * You have already installed R and RStudio.  
+ * You have moved your R workspace from your old machine to the new one.  
+1. Open your R studio and install the package _reinstallr_  and load it.   
+
+
+2. Call the *reinstallr* function from the reinstallr package as shown below:    
+
+```{r}
+library(reinstallr)
+
+reinstallr(path = "path/to/your/r/workspace")
+```
+
+The function has three arguments; path, pattern and parameters to be passed to the *install.package()* function. You will most likely just use the path argument only.    
+  * Paste the path to your r workspace to the path argument of the function. The workspace is where your R projects are located in your computer.  
+  
+*reinstallr* works in such a way that it scans through your r-workspace and looks for _library()_, _require()_ and _package::function_ calls in .R ,.Rmd, .Rnw, .Rhtml and .Rpres files and lists all the packages from the functions mentioned afore then installs them. 
+Under the hood reinstallr passes all the missing packages to *install.package()* function and then runs it to install them.  
+
+Check out the documentation for the package [here](https://github.com/calligross/reinstallr)
+
+
+
