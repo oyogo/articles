@@ -11,7 +11,6 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE,message = FALSE)
 
 
 # Introduction to docker
-This repository contains an introductory guide to getting started with docker.   
 
 Docker technology has become one of the highly used technologies in software development world, developers are now able to develop, replicate and ship containerized application(s). The system works in such a way that the container runs an isolated environment from the host machine. A closely related way of doing it would be through spinning a virtual machine and then installing an Operating system together with the dependencies but such an approach is abit limiting and somewhat expensive in terms of resources as compared to containerization which is lightweight, as such, speedy and portable in terms of sharing.   
 
