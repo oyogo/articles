@@ -6,17 +6,20 @@ editor_options:
 ---
 
 
-You have containerized your application and you could be wondering how to link it to a database (mysql for example), be it locally or on some server. Well, there are two ways to link your docker container to your data. 
- * Mount
- * Bind
+You have containerized your application and you could be wondering how to link it to a database (mysql for example), be it locally or on some remote server. Well, I hope this simple guide will be of help to you.  
+
+ Assuming you already have mysql installed (if not please check here), you will need to make some adjustments on configurations of user(s) and access privileges to the database. By default, MySQL is configured to only listen for local connections, hence the need to make some adjustments. 
  
- Let's now see how we can link our docker container to a mysql database hosted on the same machine on which the docker container is running.
+ There are two scenarios where you will need to connect docker container to mysql through an IP address: 
  
- Assuming you already have mysql installed (if not please check here), you will need to make some adjustments on configurations of user(s) and access privileges to the database. By default , more often than not,MySQL is configured to only listen for local connections, hence the need to make some adjustments. 
+   * Remote connection : the database is hosted on another machine   
+   * Local connection : the database is hosted on the same machine where the docker system is hosted.  
+   
+   N/B: It is important to note that for both scenarios above, you will need to use the IP address of the machine that is hosting the database.  
+   
+ Well, you might be wondering as to why we need an external IP address for scenario 2 yet the docker container is running on the same machine where mysql database is hosted. The reason is a docker container is always treated as some kind of a machine, as such, its assigned an address (172.17.0.2) which is different from host machine's IP address.    
  
- You might be wondering as to why we need an external IP address yet the docker container is running on the same machine where mysql database is hosted. Well, the reason is a docker container is always treated as some kind of a machine, as such, its assigned an address (172.17.0.2) which is different from host machine's IP address.  
- 
- 1. Configure mysql to listen to external IP address.   
+## 1.Configure mysql to listen to external IP address.   
   Step 1: open mysqld.cnf    
   
   
@@ -48,7 +51,7 @@ You have containerized your application and you could be wondering how to link i
        
   Step 7: Free up the cached memory using *FLUSH PRIVILEGES* command then exit mysql *mysql> exit*    
   
-  2. Now let's go back to our code. Where you are connecting to mysql database, have your credential as below:    
+## 2.Now let's go back to our code. Where you are connecting to mysql database, have your credential as below:    
   N/B: Remember to replace the details as per your credentials.   
   
   
@@ -60,6 +63,10 @@ You have containerized your application and you could be wondering how to link i
                                   
   
        
-       
+## 3.Build your docker image from the dockerfile then run it and go to http://127.0.0.1:3838 to see your application live.   
+  
+### And hurraaaaaaaaay !!! we're dooooone !!
+   
+   
         
 

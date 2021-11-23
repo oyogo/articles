@@ -1,6 +1,8 @@
 ---
 title: "File transfer"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 Ever been in a situation where you want to transfer large files/folder from one laptop to another, perhaps you're moving your folders to a new computer or from your computer to a server. Well, filezilla is one of the solutions I find easier and faster. 
@@ -15,6 +17,7 @@ Follow the steps below to perform your file transfer.
       * Open system preferences.    
       * Select sharing.    
       * check the file transfer option.  
+      * check the remote login option. 
 
 - On linux use the following guide  
 
@@ -43,6 +46,7 @@ Follow the steps below to perform your file transfer.
     - enter the IP address on the Host section.  
     - For the Logn Type, you can choose to use password or normal. Select your preferred option.  
     - enter the user of your destination computer on the User section. 
+    - hit the connect button and you will be prompted to enter the password for the remote server on a pop up that will appear.  
     
     
 5. Once your connection is successful you can now drag and drop your files/folders from either your local site tp the remote site or vice versa.  

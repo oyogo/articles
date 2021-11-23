@@ -16,7 +16,7 @@ Docker technology has become one of the highly used technologies in software dev
 
 The image below helps to illustrate how docker works in comparison to a virtual machine  
 
-![container_vs_vm](www/container-vm.png)  
+![container_vs_vm](www/container-vm.png) 
 
 # Docker  
 Docker is a computer system that helps you to create a loosely isolated environment (from your computer) called a container for your application(s). The environment is isolated from host machine in the sense that the container can have an application, operating system with a different version and dependencies from the ones existing on your host machine, in other words, we can have an R version 3.1.2 inside the container while in the host machine we have R version 3.4.1.  
@@ -56,7 +56,10 @@ Docker system is built on linux however, for windows and Mac users you can still
 
 # Dockerfile
 Below is a simple example of a Dockerfile that I built from the Education app that I developed earlier in this article.  
- ![](www/dfile.png)
+ ![](www/dfile.png)   
+
+
+
 _On your commandline you can use *touch Dockerfile* to create an empty file to begin with then use your preferred text editor to add layers to it.._  
 
 **FROM**  
@@ -106,29 +109,30 @@ This command instructs the container to open up the network port 3838 to the out
 
   
 # Building the image.  
-Once we've written our dockerfile as explained above navigate to the working directory containing you application files and the following command to build the image:  
+Once we've written our dockerfile as explained above navigate to the working directory containing you application files and enter the following command to build the image:  
 
-![](www/dbuild.png)
+![](www/dbuild.png)  
+ 
+ 
+ 
+The -t tags our image, as in, it gives our image a name.   
+The . instructs docker to use the Dockerfile in the current folder. Otherwise we would have given it the path to where the Dockerfile is located.  
 
-docker build is the command for building docker image from dockerfile.   
-The -t tags our image as in giving our image a name.   
-The . instructs docker to use the dockerfile in the current folder.  
 N/B remember to replace the nameofimage to your desired name. If you have a docker hub account you can use *yournameindockerhub/nameofimage* 
 
 # Spinning the container  
 
-You will have to wait for some minutes for your image to be built depending on the specs of your computer and internet speed.  
+You will have to wait for some minutes for your image to be built depending on the specs of your computer, internet speed and how big your application is.   
 After the image is successfully built use the following command to check if the image exists in your system.  
 
 ![](www/dimages.png)
 
 The command lists all the images in your computer which you either built or pulled from docker registry. You can now check if the image you have built is there.  
 
-To spin a container from the image we use:  
-
-Remember our application used data and if you were keen we did not add a volume in our docker file
+To spin a container from the image we use:    
 
 ![](www/drun.png)
+
 
 docker run is the command for spinning a container from a docker image.    
 -p 3838 publishes the port to the outside world.    
@@ -136,3 +140,8 @@ docker run is the command for spinning a container from a docker image.
 Well, remember when we were creating our dockerfile we did not create the data directory so you might be wondering how this will work, no need to worry. What happens is docker will automatically create the folder inside the container and then mount link it to the data folder inside the host machine.    
 
 Finally you can now check _locahost:3838_ on our browser to see your containerized application.  
+
+
+# And huuurrraaaayyy !! we have managed to containerize our application.  
+
+You can spare some time and visit the following pages for your further reading:  
