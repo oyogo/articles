@@ -1,0 +1,25 @@
+---
+title: "MySQL installation and configuration guide"
+author: "clinton"
+date: "12/2/2021"
+output: html_document
+---
+
+
+UPdate the package index
+```{r}
+$ sudo apt update
+```
+
+install the mysql-server package
+```{r}
+$ sudo apt install mysql-server
+```
+
+Configuration of mysql
+Running the DBMS's included security script. THis script changes some of the less secure default options for things like remote root logins and sample users.  
+
+```{r}
+$ sudo mysql_secure_installation 
+```
+

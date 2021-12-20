@@ -1,0 +1,45 @@
+---
+title: "creating and restoring database dump"
+output: html_document
+---
+
+You may want to move an existing database from your local machine to a server or vice versa and you could be wondering how to go about it. This article takes you through quick and simple steps on how to create and restore a database dump using the terminal/commandline.    
+
+# Log in to mysql
+Open the terminal and type the mysqldump command as in the code below. The mysqldump is used to create a backup of the MySQL database and it does so by producing SQL statements that are used to recreate the database.  
+
+```
+mysqldump -u USER -p yourdb > /path/to/file/thedump.sql  
+
+```
+_remember to replace USER with the username and yourdb with the database name for which you want to create a dump.  
+
+# Log in to the new location where you want to restore the database
+
+
+```
+mysql -u USER -p 
+
+```
+
+# Create a database with the same name as in the previous location
+
+```
+mysql> create database yourdb;
+
+```
+
+Exit mysql
+
+```
+mysql> quit
+```
+
+# Restore the dump
+
+```
+mysql -u USER -p dbname < /path/to/file/thedump.sql  
+
+```
+
+
