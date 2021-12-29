@@ -56,4 +56,13 @@ This will release the image to your application on heroku servers.
 The application can be seen and interacted with by using the above command.  
 
 
+## To disable your app   
+
+    $ heroku ps:scale web=0
+
+## To restart your app   
+
+    $ heroku ps:scale web=1
+
+
 
