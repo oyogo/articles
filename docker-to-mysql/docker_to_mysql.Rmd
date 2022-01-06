@@ -25,6 +25,9 @@ You have containerized your application and you could be wondering how to link i
   
          sudo nano /etc/mysql/mysql.conf.d/mysql.cnf
          
+  navigate to /etc/mysql/mysql.conf.d
+  check for a file named mysql.cnf or mysqld.cnf and open it using nano editor.
+         
   Step 2: Check for the line that has _bind-address = 127.0.0.1_    
          The default value 127.0.0.1 means that mysql will listen for local connections only. So to open it up to external address, we will change that line to _bind-address  = 0.0.0.0_. Save the changes then exit the nano editor.
          N/B: Sometimes the _bind-address = 127.0.0.1_ may not be in the mysqld.cnf, in that case, just add the line at the bottom (in this case _bind-address = 0.0.0.0).    
