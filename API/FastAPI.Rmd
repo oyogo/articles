@@ -1,0 +1,55 @@
+---
+title: "FastAPI"
+author: "Clinton"
+date: '2022-09-21'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## API 
+What's an API? 
+Its simply an application that sits between a web server and an application to facilitate data transfer. The image below does some justice in explaining how it works. 
+
+![](www/api_explained.jpg)
+
+## FastAPI  
+FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.   
+FastAPI is very fast, as the name suggests, due to its out-of-the-box support of the async feature of Python 3.6+.   
+
+
+## Pydantic models  
+This is a python library used to declare, validate and parse data. In the context of an API, data coming from a request.    
+
+## example  
+
+
+## Connecting your PC to the web.
+## Localhost.run
+Thanks to [localhost.run](https://localhost.run/docs/) we can create an HTTP tunnel to apps running locally in our PC's. An alternative approach could be ngrok but then the process is quite simple with localhost.run seeing that you don't need to sign up for an account and install a client locally, all you need is ssh client which is mostly built-in into major systems.     
+
+To connect an internet domain to an application running locally on a given port say 8000 (like in this case, FastAPI),
+open your terminal and enter the following commands.     
+_Note: The only thing you need to change when connecting to a different app is the port number._   
+
+```
+$ ssh -R 80:localhost:8000 nokey@localhost.run
+```
+
+once you run the above command you'll see something similar to the output below: 
+
+```
+...
+...
+
+** your connection id is 9d7d4e04-ac0e-4350-9a43-35f56a4affe2, please mention it if you send me a message about an issue. **
+
+a6cb40db137498.lhrtunnel.link tunneled with tls termination, https://a6cb434db137498.lhrtunnel.link
+
+```
+The url you should use it the last bit of the output : https://a6cb434db137498.lhrtunnel.link.    
+
+_Note: The url keeps on changing after about 20 or so minutes as such you might need to update it wherever you use it._        
+
+

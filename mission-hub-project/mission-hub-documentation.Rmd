@@ -1,6 +1,10 @@
 ---
 title: "ALIVE(K) Missions Resource Hub"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
 ---
 
 Hi, Welcome to ALIVE (K) Missions Resource Hub.      
@@ -27,10 +31,9 @@ The home page contains general details on mission activities. It has six section
 The header bar has the organisation logo, dashboard title, dropdown for downloads (Resources) and Upload button for mission mission request form.    
 
 
-#### * Header bar - Resources   
+#### * Header bar - Resources     
 
-![](www/header_resources.png){width="70%" height="70%"}      
-
+![](www/header_resources.png){width="70%" height="70%"}        
 
 
 If you click the resources tab you'll have a drop-down with a list of resources you can download, namely;

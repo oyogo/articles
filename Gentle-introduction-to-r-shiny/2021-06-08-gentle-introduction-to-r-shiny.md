@@ -59,16 +59,15 @@ library(plotly) # for data visualization
  
 # data import    
  
-We will use the [students performance](https://raw.githubusercontent.com/oyogo/data/main/StudentsPerformance.csv) data from kaggle. 
+We will use the [students performance](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams) data from kaggle. 
 
   > To read in the data you can either use _read.csv("path/to/your/data.csv")_
     or _fread("path/to/your/data.csv")_
     but I'd prefer fread function from data.table because its quite fast, especially when the data file is big.  
+    Secondly, I have done some transformations on the data. The transformed data is on my github account and we'll fetch it from there. 
+    This is so that we can focus on dashboard development and not data wrangling. 
     
-    
-```r
-stud_perf <- fread("https://raw.githubusercontent.com/oyogo/data/main/StudentsPerformance.csv")
-```
+
  
 # Structure of a Shiny app
  
@@ -360,8 +359,9 @@ library(ggplot2)
 library(data.table)
 library(dplyr)
 
-stud_perf_melt <- fread("../data/student_performance_preprocessed_data.csv") #the data is stored inside the data folder in the app directory. The two dots mean the folder is two steps up 
+stud_perf_melt <- fread("https://raw.githubusercontent.com/oyogo/data/main/student_performance_preprocessed_data.csv") #the data is stored inside the data folder in the app directory. The two dots mean the folder is two steps up 
 
+# **Note: I have done some transformation on the data and uploaded it to my github that's why I am fetching it from there.** 
 
 # Define UI for application
 ui <- fluidPage(
@@ -440,9 +440,10 @@ server <- function(input, output) {
                color = ~gender,
                text = ~paste0("Gender: ", gender, "\n", "Subject: ", subject,"\n","Mean score: ",mean_score)) %>%
            add_bars(showlegend=TRUE, hoverinfo='text' ) %>%
-           layout(title="Mean gender performance",yaxis=list(title="Mean score"))#,
-                  #xaxis = list(title = "Subject"),
-                  #legend = list( title = list(text = "<b>Gender</b>"),orientation = "h"))
+           layout(title="Mean gender performance",yaxis=list(title="Mean score"))%>%
+       config(displayModeBar = FALSE, displaylogo = FALSE, 
+              scrollZoom = FALSE, showAxisDragHandles = TRUE, 
+              showSendToCloud = FALSE)
            
             
     })
@@ -477,7 +478,10 @@ server <- function(input, output) {
                 yaxis = list(
                     title = "Mean score"
                 )
-            ) 
+            ) %>%
+       config(displayModeBar = FALSE, displaylogo = FALSE, 
+              scrollZoom = FALSE, showAxisDragHandles = TRUE, 
+              showSendToCloud = FALSE)
     })
     
    

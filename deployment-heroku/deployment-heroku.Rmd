@@ -1,23 +1,36 @@
 ---
-title: "Deploying shiny apps on Heroku"
+title: "Deploying dockerized shiny apps on Heroku"
 output: html_notebook
 ---
 
-# Login to heroku 
+Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. They offer free services where you can run up to 5 apps but if you verify your account with a credit card you can get more than 5.   
 
-You need to have created an account on Heroku sign up page. 
+Get to the sign up page and create an account and follow the below instructions.  
+
+# Install Heroku CLI
+  For ubuntu 16+   
+    
+    $ sudo snap install --classic heroku   
+    
+  For mac   
+   
+    $ brew tap heroku/brew && brew install heroku  
+    
+ # Login to Heroku      
+
+Navigate to where your shiny app directory is located through the terminal and enter the following command.      
 
     $ heroku login  
 
-This will open the login page on your browser, enter the required details and if its successful you will see a *logging in... done* then *Logged in as _youremail_*   
+This will open the login page on your browser, enter the required details and if its successful you will see a *logging in... done* then *Logged in as _youremail_*       
 
 # Creating a Heroku app   
- 
+
+The below command will create a Heroku app on Heroku servers.   
+
     $ heroku create    
 
-The above command will create a Heroku app on Heroku servers.    
-
-# Deploying code
+# Deploying code     
 
 ## Login to heroku container registry  
 
@@ -29,10 +42,12 @@ _you need to have docker installed in your computer_
 
 ## Build the image  
 
-    $ heroku container:push web  
-Navigate to your projects directory then enter the above command. 
+Navigate to your projects directory then run below command. 
 This will build the image and push it to the container registry. 
 You need to have a Dockerfile on the directory containing your app code.  
+
+    $ heroku container:push web  
+
 
 ## Pushing an existing image  
 
@@ -63,6 +78,11 @@ The application can be seen and interacted with by using the above command.
 ## To restart your app   
 
     $ heroku ps:scale web=1
+
+
+Quite some simple and quick steps there to have your dockerized shiny app deployed for free !    
+
+For further reading I recomment you check the [documentation](https://devcenter.heroku.com/articles/container-registry-and-runtime) on heroku.    
 
 
 

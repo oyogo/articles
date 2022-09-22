@@ -41,7 +41,8 @@ You have containerized your application and you could be wondering how to link i
   
         sudo systemctl restart mysql    
         
-  Step 5: Create a user that you will use to connect from the docker container (which is treated as a 'remote server') to mysql on the host machine.       
+  Step 5: Create a user that you will use to connect from the docker container (which is treated as a 'remote server') to mysql on the host machine.  
+  
        mysql> CREATE USER 'somename'@'docker_container_ip' IDENTIFIED BY 'password';    
        
        N/B: use *hostname -i*  to check the docker container ip address

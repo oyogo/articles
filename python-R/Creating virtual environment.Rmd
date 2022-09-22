@@ -1,0 +1,29 @@
+---
+title: "Creating virtual environment"
+author: "Clinton"
+date: '2022-05-24'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Open the terminal and run the following code  
+
+    python3 -m venv ~/.venvs/myenv  
+    
+_For that to work we have assumed you already have python3 installed_    
+
+
+Activate the virtual environment  
+
+    source ~/.venvs/myenv/bin/activate   
+  
+
+Install the libraries listed in the requirements.txt file  
+
+    pip install -r requirements.txt  
+    
+    
+
