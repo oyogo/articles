@@ -177,7 +177,7 @@ This is a python library used to declare, validate and parse data. In the contex
 
 Having looked at the various components of a FastAPI application see below the app that recieves and processes a payload from dockerhub. 
 
-## example 
+## entire code : example 
 
 ```
 import json, string, random, subprocess, logging, requests
@@ -192,7 +192,7 @@ from datetime import datetime
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d/%m/%Y %H:%M:%S %Z', level=logging.DEBUG)
 
-# load settings from .env file
+# load settings from .env file where you could define your credentials to access
 # https://pydantic-docs.helpmanual.io/usage/settings/#dotenv-env-support
 class Settings(BaseSettings):
     title: str = "Dashboards Webhook"
@@ -217,9 +217,9 @@ class PushData(BaseModel):
         example=datetime.fromtimestamp(1645586259)
     )
     pusher: str = Field(
-        "gslicraf",
+        "account1",
         title="pusher account username",
-        example="gslicraf"
+        example="account1"
     )
     tag: str = Field(
         "latest",
@@ -229,14 +229,14 @@ class PushData(BaseModel):
 
 class Repository(BaseModel):
     namespace: str = Field(
-        "gslicraf",
+        "account1",
         title="pusher account username",
-        example="gslicraf"
+        example="account1"
     )
     owner: str = Field(
-        "gslicraf",
+        "account1",
         title="image account owner username",
-        example="gslicraf"
+        example="account1"
     )
     name: str = Field(
         "geo-api",
@@ -244,14 +244,14 @@ class Repository(BaseModel):
         example='geo-api'
     )
     repo_name: str = Field(
-        "gslicraf/geo-api",
+        "account1/geo-api",
         title="docker image tag",
-        example="gslicraf/geo-api"
+        example="account1/geo-api"
     )
     repo_url: str = Field(
-        "https://hub.docker.com/r/gslicraf/geo-api",
+        "https://hub.docker.com/r/account1/geo-api",
         title="image url on dockerhub registry",
-        example="https://hub.docker.com/r/gslicraf/geo-api"
+        example="https://hub.docker.com/r/account1/geo-api"
     )
     date_created: datetime = Field(
         datetime.fromtimestamp(1644329839),
@@ -266,7 +266,7 @@ class Repository(BaseModel):
     dockerfile: str = Field(
         None,
         title="dockerfile content",
-        example="#\n# BUILD\u0009\u0009docker build -t svendowideit/apt-cacher .\n# RUN\u0009\u0009docker run -d -p 3142:3142 -name apt-cacher-run apt-cacher\n#\n# and then you can run containers with:\n# \u0009\u0009docker run -t -i -rm -e http_proxy http://192.168.1.2:3142/ debian bash\n#\nFROM\u0009\u0009ubuntu\n\n\nVOLUME\u0009\u0009[/var/cache/apt-cacher-ng]\nRUN\u0009\u0009apt-get update ; apt-get install -yq apt-cacher-ng\n\nEXPOSE \u0009\u00093142\nCMD\u0009\u0009chmod 777 /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*\n"
+        example="astring"
     )
     full_description: str = Field(
         None,
@@ -307,9 +307,9 @@ class Repository(BaseModel):
 
 class Payload(BaseModel):
     callback_url: str = Field(
-        "https://registry.hub.docker.com/u/gslicraf/geo-api/hook/2jg2hgehh4wAYi0eaimEAQ8SCO4qe2CW2/",
+        "https://registry.hub.docker.com/u/account1/geo-api/hook/2jg2hgehh4wAYi0eaimEAQ8SCO4qe2CW2/",
         title="dockerhub chain confirmation url",
-        example="https://registry.hub.docker.com/u/gslicraf/geo-api/hook/2jg2hgehh4wAYi0eaimEAQ8SCO4qe2CW2/"
+        example="https://registry.hub.docker.com/u/account1/geo-api/hook/2jg2hgehh4wAYi0eaimEAQ8SCO4qe2CW2/"
     )
     push_data: PushData
     repository: Repository
@@ -340,7 +340,7 @@ async def payload_handler(payload: Payload, background_tasks: BackgroundTasks):
     """Receives a payload from dockerhub
     The payload contains information about the pushed image, time and repository.
     """
-    valid_accounts = ['jaysnm', 'gslicraf']
+    valid_accounts = ['account1', 'account2']
     # be sure the payload webhook was triggered on trusted accounts
     if payload.push_data.pusher not in valid_accounts:
         logging.warn(f"Received invalid payload from {payload.repository.repo_url} for {payload.repository.repo_name} pushed by {payload.push_data.pusher}")
@@ -419,15 +419,23 @@ _Note: The url keeps on changing after about 20 or so minutes as such you might 
 ## on production  
 For a production set up you might need to consider the following:
 
-* Configure the app to run as a systemd app (for linux users).   
+* Configure the app to run as a systemd service (for linux users).   
 * Run the application using gunicorn, set the number of workers to your liking depending on the number of requests the API will be handling at any given time.     
 * configure the FastAPI port to a proxy webserver of your choice such as nginx which will forward the requests to the app port.     
 
+The infographic below shows how the system looks like in our server set up 
+
+![](www/infographics - CI_CD Pipeline.jpg)
 
 References:  
 1. https://fastapi.tiangolo.com/  
 2. https://localhost.run/docs/   
 3. https://www.uvicorn.org/#why-asgi  
-4. https://asgi.readthedocs.io/en/latest/ 
-5. https://www.educative.io/blog/python-fastapi-tutorial   
+4. https://docs.gunicorn.org/en/stable/install.html    
+5. https://asgi.readthedocs.io/en/latest/ 
+6. https://www.educative.io/blog/python-fastapi-tutorial   
+7. https://ubuntu.com/tutorials/install-and-configure-nginx#6-thats-all    
+8. http://nginx.org/en/docs/beginners_guide.html    
+9. https://pydantic-docs.helpmanual.io/   
+
 

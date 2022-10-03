@@ -26,4 +26,4 @@ Install the libraries listed in the requirements.txt file
     pip install -r requirements.txt  
     
     
-
+Open vscode and press ctrl + shift + p, on the dropdown list that appears select python interpreter and choose the python version on the virtual environment that was created. 
